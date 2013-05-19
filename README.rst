@@ -13,8 +13,8 @@ Just import this module.
 
     import uniout
 
-Example
--------
+An Example
+----------
 
 ::
 
