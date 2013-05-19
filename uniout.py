@@ -6,8 +6,8 @@ import sys
 
 # the helpers
 
-escape_x_re = re.compile(r'(?:\\x..)+')
-escape_u_re = re.compile(r'(?:\\u....|\\U........)+')
+escape_x_re = re.compile(r'(?:\\x[0-9a-f]{2})+')
+escape_u_re = re.compile(r'(?:\\u[0-9a-f]{4}|\\U[0-9a-f]{8})+')
 encoding = sys.getfilesystemencoding()
 
 def dexuescape(s):
