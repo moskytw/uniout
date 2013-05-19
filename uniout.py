@@ -28,40 +28,5 @@ for attrname in dir(sys.stdout):
 # modify the write method to de-escape
 uniout.write = lambda s: sys.__stdout__.write( dexuescape(s) )
 
-if __name__ != '__main__':
-    # install the uniout
-    sys.stdout = uniout
-
-    # just insert `import uniout` in your script to take effect
-
-else:
-    import unittest
-
-    class TestUniout(unittest.TestCase):
-
-        def test_deescape_x(self):
-            i = r'\xe4\xb8\xad\xe6\x96\x87'
-            o = r'中文'
-            self.assertEqual( dexuescape(i), o)
-
-        def test_deescape_x_with_n(self):
-            i = r'\xe4\xb8\xad\n\xe6\x96\x87'
-            o = r'中\n文'
-            self.assertEqual( dexuescape(i), o)
-
-        def test_deescape_u(self):
-            i = r"\u4e2d\u6587"
-            o = r'中文'
-            self.assertEqual( dexuescape(i), o)
-
-        def test_deescape_u_with_n(self):
-            i = r"\u4e2d\n\u6587"
-            o = r'中\n文'
-            self.assertEqual( dexuescape(i), o)
-
-        def test_mixed(self):
-            i = r"\xe4\xb8\xad\n\xe6\x96\x87\u4e2d\n\u6587"
-            o = r'中\n文中\n文'
-            self.assertEqual( dexuescape(i), o)
-
-    unittest.main()
+# install the uniout
+sys.stdout = uniout
