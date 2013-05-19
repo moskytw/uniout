@@ -1,8 +1,8 @@
 Uniout
 ======
 
-Print the object representation in readable unicode char instead of the code of
-char.
+It makes Python print the object representation in readable chars instead of the
+escaped string.
 
 Usage
 -----

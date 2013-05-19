@@ -4,7 +4,7 @@ from uniout import __version__
 
 setup(
     name    = 'uniout',
-    description = 'It makes Python print the object representation in readable chars instead of the escaped str',
+    description = 'It makes Python print the object representation in readable chars instead of the escaped string.',
     long_description = open('README.rst').read(),
     version = __version__,
     author  = 'Mosky',
