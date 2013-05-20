@@ -21,7 +21,7 @@ def dexuescape(s):
 # make uniout
 uniout = lambda: 'middleware of stdout' # any instance
 
-# make uniout to look like stdout
+# make uniout look like stdout
 for attrname in dir(sys.stdout):
     if not attrname.startswith('__'):
         setattr(uniout, attrname, getattr(sys.stdout, attrname))
