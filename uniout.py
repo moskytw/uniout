@@ -23,8 +23,7 @@ uniout = lambda: 'middleware of stdout' # any instance
 
 # make uniout look like stdout
 for attrname in dir(sys.stdout):
-    if not attrname.startswith('__'):
-        setattr(uniout, attrname, getattr(sys.stdout, attrname))
+    setattr(uniout, attrname, getattr(sys.stdout, attrname))
 
 # modify the write method to de-escape
 uniout.write = lambda s: sys.__stdout__.write(dexuescape(s))
