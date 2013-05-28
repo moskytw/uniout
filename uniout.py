@@ -16,6 +16,11 @@ def dexuescape(s):
     r'''decode the \x, \u and \U in a escaped string -> encoded string'''
     s = escape_x_re.sub(lambda m: m.group().decode('string-escape'), s)
     s = escape_u_re.sub(lambda m: m.group().decode('unicode-escape').encode(encoding), s)
+
+    # for Python < 2.7
+    if isinstance(s, unicode):
+        s = s.encode(encoding)
+
     return s
 
 # make uniout
