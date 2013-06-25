@@ -10,6 +10,7 @@ setup(
     author  = 'Mosky',
     author_email = 'mosky.tw@gmail.com',
     #url = 'http://uniout.mosky.tw/',
+    url = 'https://github.com/moskytw/uniout',
     py_modules = ['uniout'],
     license = 'MIT',
     classifiers = [
