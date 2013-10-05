@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__all__ = ['Uniout', 'dexuescape']
+__all__ = ['Uniout', 'unescape']
 
 import sys
 import re
@@ -10,7 +10,7 @@ escape_x_re = re.compile(r'(?:\\x[0-9a-f]{2})+')
 escape_u_re = re.compile(r'(?:\\u[0-9a-f]{4}|\\U[0-9a-f]{8})+')
 encoding = sys.getfilesystemencoding()
 
-def dexuescape(s):
+def unescape(s):
     r'''decode the \x, \u and \U in a escaped string -> encoded string'''
 
     s = escape_x_re.sub(lambda m: m.group().decode('string-escape'), s)
@@ -42,4 +42,4 @@ class Uniout(object):
                 setattr(self, attr_name, getattr(stream, attr_name))
 
         # modify the write method to de-escape
-        self.write = lambda data: self.stream.write(dexuescape(data))
+        self.write = lambda bytes: self.stream.write(unescape(bytes))
