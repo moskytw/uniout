@@ -1,4 +1,4 @@
 global-include README* LICENSE*
-global-exclude *.pyc
 include README.rst LICENSE.txt
 graft examples
+global-exclude *.pyc
