@@ -22,16 +22,16 @@ def dexuescape(s):
     return s
 
 
-class Uniout:
+class Uniout(object):
 
-    def __init__(self,stream):
+    def __init__(self, stream):
+
+        self.stream = stream
 
         # make uniout look like stdout
         for attrname in dir(stream):
             if not attrname.startswith('_'):
                 setattr(self, attrname, getattr(stream, attrname))
-
-        self.stream = stream
 
         # modify the write method to de-escape
         self.write = lambda data: self.stream.write(dexuescape(data))
