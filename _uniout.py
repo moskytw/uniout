@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+__version__ = '0.3'
+
 __all__ = ['unescape', 'Uniout', 'runs_in_ipython']
 
 import sys
