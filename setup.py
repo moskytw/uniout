@@ -3,11 +3,11 @@ from distutils.core import setup
 from uniout import __version__
 
 setup(
-    name    = 'uniout',
+    name = 'uniout',
     description = 'Never see escaped bytes in output.',
     long_description = open('README.rst').read(),
     version = __version__,
-    author  = 'Mosky',
+    author = 'Mosky',
     author_email = 'mosky.tw@gmail.com',
     #url = 'http://uniout.mosky.tw/',
     url = 'https://github.com/moskytw/uniout',
