@@ -36,3 +36,14 @@ You can install it via PyPI,
     sudo pip install uniout
 
 or download it manually.
+
+Change Log
+----------
+
+v0.3
+~~~~
+
+Thanks for the pull requests `#3 <https://github.com/moskytw/uniout/pull/3>`_ and `#4 <https://github.com/moskytw/uniout/pull/4>`_ from `@timtan <https://github.com/timtan>`_, it now
+
+1. works well with IPython,
+2. and also supports stderr.
