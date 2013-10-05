@@ -1,18 +1,22 @@
-from distutils.core import setup
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
-from uniout import __version__
+from setuptools import setup
+
+import uniout
 
 setup(
+
     name = 'uniout',
+    version = uniout.__version__,
     description = 'Never see escaped bytes in output.',
     long_description = open('README.rst').read(),
-    version = __version__,
+
     author = 'Mosky',
-    author_email = 'mosky.tw@gmail.com',
-    #url = 'http://uniout.mosky.tw/',
     url = 'https://github.com/moskytw/uniout',
-    py_modules = ['uniout'],
+    author_email = 'mosky.tw@gmail.com',
     license = 'MIT',
+    platforms = 'any',
     classifiers = [
         'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
@@ -22,6 +26,9 @@ setup(
         'Programming Language :: Python',
         'Topic :: Utilities',
         'Topic :: Software Development :: Libraries :: Python Modules',
-    ]
+    ],
+
+    py_modules = ['_uniout', 'uniout'],
+
 )
 
