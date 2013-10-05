@@ -23,6 +23,8 @@ def dexuescape(s):
     return s
 
 class Uniout(object):
+    '''It simulates a stream object, but unescapes the escaped bytes before
+    writing.'''
 
     def __init__(self, stream):
 
