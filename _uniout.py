@@ -22,7 +22,7 @@ def dexuescape(s):
     return s
 
 
-class UniOut:
+class Uniout:
 
     def __init__(self,stream):
 
@@ -37,4 +37,4 @@ class UniOut:
         self.write = lambda data: self.stream.write(dexuescape(data))
 
 
-__all__ = ['UniOut', 'dexuescape']
+__all__ = ['Uniout', 'dexuescape']
