@@ -4,7 +4,7 @@
 __version__ = '0.3'
 
 import sys
-from _uniout import uniout
+from _uniout import Uniout
 
 def runs_in_ipython():
     import __builtin__
@@ -13,6 +13,8 @@ def runs_in_ipython():
 
 if runs_in_ipython():
     from IPython.utils import io
-    io.stdout = io.IOStream(uniout)
+    io.stdout = Uniout(sys.stdout)
+    io.stderr = Uniout(sys.stderr)
 else:
-    sys.stdout = uniout
+    sys.stdout = Uniout(sys.stdout)
+    sys.stderr = Uniout(sys.stderr)
