@@ -3,7 +3,6 @@
 
 __version__ = '0.3'
 
-import sys
 from _uniout import Uniout
 
 def runs_in_ipython():
@@ -16,5 +15,6 @@ if runs_in_ipython():
     io.stdout = Uniout(sys.stdout)
     io.stderr = Uniout(sys.stderr)
 else:
+    import sys
     sys.stdout = Uniout(sys.stdout)
     sys.stderr = Uniout(sys.stderr)
