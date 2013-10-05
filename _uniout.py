@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__all__ = ['Uniout', 'unescape']
+__all__ = ['unescape', 'Uniout', 'runs_in_ipython']
 
 import sys
 import re
@@ -22,12 +22,6 @@ def unescape(s):
 
     return s
 
-def runs_in_ipython():
-    '''Check if we are in IPython.'''
-    import __builtin__
-    return '__IPYTHON__' in __builtin__.__dict__ and \
-           __builtin__.__dict__['__IPYTHON__']
-
 class Uniout(object):
     '''It simulates a stream object, but unescapes the escaped bytes before
     writing.'''
@@ -43,3 +37,9 @@ class Uniout(object):
 
         # modify the write method to de-escape
         self.write = lambda bytes: self.stream.write(unescape(bytes))
+
+def runs_in_ipython():
+    '''Check if we are in IPython.'''
+    import __builtin__
+    return '__IPYTHON__' in __builtin__.__dict__ and \
+           __builtin__.__dict__['__IPYTHON__']
