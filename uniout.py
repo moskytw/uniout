@@ -3,12 +3,7 @@
 
 __version__ = '0.3'
 
-from _uniout import Uniout
-
-def runs_in_ipython():
-    import __builtin__
-    return '__IPYTHON__' in __builtin__.__dict__ and \
-           __builtin__.__dict__['__IPYTHON__']
+from _uniout import Uniout, runs_in_ipython
 
 if runs_in_ipython():
     from IPython.utils import io
