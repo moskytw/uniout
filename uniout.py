@@ -1,11 +1,10 @@
 #!/usr/bin/env python
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 __version__ = '0.2.2'
 
 import sys
 from _uniout import uniout
-
 
 def runs_in_ipython():
     import __builtin__

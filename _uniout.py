@@ -1,5 +1,9 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import re
 import sys
+
 # the helpers
 
 escape_x_re = re.compile(r'(?:\\x[0-9a-f]{2})+')
@@ -28,4 +32,4 @@ for attrname in dir(sys.stdout):
 # modify the write method to de-escape
 uniout.write = lambda s: sys.__stdout__.write(dexuescape(s))
 
-__all__ = ['uniout', 'dexuescape' ]
+__all__ = ['uniout', 'dexuescape']
