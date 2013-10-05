@@ -8,7 +8,6 @@ from _uniout import uniout
 
 
 def runs_in_ipython():
-
     import __builtin__
     return '__IPYTHON__' in __builtin__.__dict__ and \
            __builtin__.__dict__['__IPYTHON__']

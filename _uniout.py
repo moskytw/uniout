@@ -28,4 +28,4 @@ for attrname in dir(sys.stdout):
 # modify the write method to de-escape
 uniout.write = lambda s: sys.__stdout__.write(dexuescape(s))
 
-__slots__ = [uniout, dexuescape ]
+__all__ = ['uniout', 'dexuescape' ]
