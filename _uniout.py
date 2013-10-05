@@ -11,13 +11,16 @@ escape_u_re = re.compile(r'(?:\\u[0-9a-f]{4}|\\U[0-9a-f]{8})+')
 encoding = sys.getfilesystemencoding()
 
 def dexuescape(s):
-    r'''decode the \x, \u and \U in a escaped string -> encoded string'''
-    s = escape_x_re.sub(lambda m: m.group().decode('string-escape'), s)
-    s = escape_u_re.sub(lambda m: m.group().decode('unicode-escape').encode(encoding), s)
+    r'''try to decode the \x, \u and \U in a escaped string -> encoded string'''
+    try:
+        s = escape_x_re.sub(lambda m: m.group().decode('string-escape'), s)
+        s = escape_u_re.sub(lambda m: m.group().decode('unicode-escape').encode(encoding), s)
 
-    # for Python < 2.7
-    if isinstance(s, unicode):
-        s = s.encode(encoding)
+        # for Python < 2.7
+        if isinstance(s, unicode):
+            s = s.encode(encoding)
+    except:
+        pass
 
     return s
 
