@@ -45,5 +45,5 @@ v0.3
 
 Thanks for the pull requests `#3 <https://github.com/moskytw/uniout/pull/3>`_ and `#4 <https://github.com/moskytw/uniout/pull/4>`_ from `@timtan <https://github.com/timtan>`_, it now
 
-1. works well with IPython,
+1. works well with `IPython <http://ipython.org/>`_,
 2. and also supports stderr.
