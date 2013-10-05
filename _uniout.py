@@ -21,15 +21,20 @@ def dexuescape(s):
 
     return s
 
-# make uniout
-uniout = lambda: 'middleware of stdout' # any instance
 
-# make uniout look like stdout
-for attrname in dir(sys.stdout):
-    if not attrname.startswith('__'):
-        setattr(uniout, attrname, getattr(sys.stdout, attrname))
+class Uniout(object):
 
-# modify the write method to de-escape
-uniout.write = lambda s: sys.__stdout__.write(dexuescape(s))
+    def __init__(self, stream):
 
-__all__ = ['uniout', 'dexuescape']
+        self.stream = stream
+
+        # make uniout look like stdout
+        for attrname in dir(stream):
+            if not attrname.startswith('_'):
+                setattr(self, attrname, getattr(stream, attrname))
+
+        # modify the write method to de-escape
+        self.write = lambda data: self.stream.write(dexuescape(data))
+
+
+__all__ = ['Uniout', 'dexuescape']
