@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from _uniout import __version__, Uniout, runs_in_ipython
+__version__ = '0.3'
+
+from _uniout import Uniout, runs_in_ipython
 import sys
 
 if runs_in_ipython():
