@@ -3,8 +3,8 @@
 
 __version__ = '0.3'
 
-from _uniout import Uniout, runs_in_ipython
 import sys
+from _uniout import Uniout, runs_in_ipython
 
 if runs_in_ipython():
     from IPython.utils import io
