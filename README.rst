@@ -40,6 +40,11 @@ or download it manually.
 Change Log
 ----------
 
+v0.3.1
+~~~~~~
+
+1. Fixed a bug when Uniout works with IPython.
+
 v0.3
 ~~~~
 
