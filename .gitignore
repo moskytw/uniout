@@ -1,5 +1,7 @@
+#
 *.pyc
-/dist
-/MANIFEST
-/tags
+/docs/_build
+
+#
 /uniout.egg-info
+/dist
