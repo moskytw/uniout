@@ -14,7 +14,7 @@ except ImportError:
 string_literal_re = re.compile(r'''(?<![uU])(?P<q>['"]).+?(?<!\\)(?P=q)''')
 unicode_literal_re = re.compile(r'''[uU](?P<q>['"]).+?(?<!\\)(?P=q)''')
 
-def unescape_bytes(b, target_encoding):
+def unescape_string_literal(b, target_encoding):
 
     b = b.decode('string-escape')
 
@@ -33,7 +33,7 @@ def unescape_bytes(b, target_encoding):
 
     return b
 
-def unescape_unicodes(b, target_encoding):
+def unescape_unicode_literal(b, target_encoding):
     return b.decode('unicode-escape').encode(target_encoding)
 
 def unescape(b, target_encoding=None):
@@ -41,9 +41,9 @@ def unescape(b, target_encoding=None):
     if target_encoding is None:
         target_encoding = sys.stdout.encoding
 
-    b = string_literal_re.sub(lambda m: unescape_bytes(m.group(), target_encoding), b)
+    b = string_literal_re.sub(lambda m: unescape_string_literal(m.group(), target_encoding), b)
 
-    b = unicode_literal_re.sub(lambda m: unescape_unicodes(m.group(), target_encoding), b)
+    b = unicode_literal_re.sub(lambda m: unescape_unicode_literal(m.group(), target_encoding), b)
 
     return b
 
