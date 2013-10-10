@@ -23,7 +23,7 @@ def unescape_string_literal(b, target_encoding):
         r = chardet.detect(b)
         confidence, b_encoding = r['confidence'], r['encoding']
 
-        if confidence >= 0.5 and b_encoding != target_encoding:
+        if confidence >= 0.5 and b_encoding.lower() not in ('ascii', target_encoding.lower()):
             try:
                 b = b.decode(b_encoding)
             except (UnicodeDecodeError, LookupError):
