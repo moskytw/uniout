@@ -68,7 +68,6 @@ def unescape(b, target_encoding):
 
     b = string_literal_re.sub(lambda m: unescape_string_literal(m.group(), target_encoding), b)
     b = unicode_literal_re.sub(lambda m: unescape_unicode_literal(m.group(), target_encoding), b)
-
     return b
 
 def make_unistream(stream):
