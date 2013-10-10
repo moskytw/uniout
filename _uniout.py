@@ -6,21 +6,46 @@ __all__ = ['unescape', 'make_unistream', 'runs_in_ipython']
 import sys
 import re
 
-escape_x_re = re.compile(r'(?:\\x[0-9a-f]{2})+')
-escape_u_re = re.compile(r'(?:\\u[0-9a-f]{4}|\\U[0-9a-f]{8})+')
-encoding = sys.getfilesystemencoding()
+try:
+    import chardet
+except ImportError:
+    chardet = None
 
-def unescape(s):
-    r'''decode the \x, \u and \U in a escaped string -> encoded string'''
+string_literal_re = re.compile('(?![uU])(?P<q>[\'"]).+(?P=q)')
+unicode_literal_re = re.compile('[uU](?P<q>[\'"]).+(?P=q)')
 
-    s = escape_x_re.sub(lambda m: m.group().decode('string-escape'), s)
-    s = escape_u_re.sub(lambda m: m.group().decode('unicode-escape').encode(encoding), s)
+def unescape_bytes(b, target_encoding):
 
-    # for Python < 2.7
-    if isinstance(s, unicode):
-        s = s.encode(encoding)
+    b = b.decode('string-escape')
 
-    return s
+    if chardet:
+
+        r = chardet.detect(b)
+        confidence, b_encoding = r['confidence'], r['encoding']
+
+        if confidence >= 0.5 and b_encoding != target_encoding:
+            try:
+                b = b.decode(b_encoding)
+            except (UnicodeDecodeError, LookupError):
+                pass
+            else:
+                b = b.encode(target_encoding)
+
+    return b
+
+def unescape_unicodes(b, target_encoding):
+    return b.decode('unicode-escape').encode(target_encoding)
+
+def unescape(b, target_encoding=None):
+
+    if target_encoding is None:
+        target_encoding = sys.stdout.encoding
+
+    b = string_literal_re.sub(lambda m: unescape_bytes(m.group(), target_encoding), b)
+
+    b = unicode_literal_re.sub(lambda m: unescape_unicodes(m.group(), target_encoding), b)
+
+    return b
 
 def make_unistream(stream):
 
@@ -32,7 +57,7 @@ def make_unistream(stream):
             setattr(unistream, attr_name, getattr(stream, attr_name))
 
     # modify the write method to de-escape
-    unistream.write = lambda bytes: stream.write(unescape(bytes))
+    unistream.write = lambda bytes: stream.write(unescape(bytes, unistream.encoding))
 
     return unistream
 
