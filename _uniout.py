@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys
 import re
 
 def literalize(content, is_unicode=False):
@@ -64,11 +63,8 @@ def unescape_unicode_literal(b, target_encoding):
         is_unicode=True
     )
 
-def unescape(b, target_encoding=None):
+def unescape(b, target_encoding):
     '''Unescape all string and unicode literals.'''
-
-    if target_encoding is None:
-        target_encoding = sys.stdout.encoding
 
     b = string_literal_re.sub(lambda m: unescape_string_literal(m.group(), target_encoding), b)
     b = unicode_literal_re.sub(lambda m: unescape_unicode_literal(m.group(), target_encoding), b)
