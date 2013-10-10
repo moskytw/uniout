@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__all__ = ['unescape', 'make_unistream', 'runs_in_ipython']
-
 import sys
 import re
 
