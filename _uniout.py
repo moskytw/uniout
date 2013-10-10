@@ -11,12 +11,23 @@ try:
 except ImportError:
     chardet = None
 
+def literalize(content, is_unicode=False):
+
+    quote_mark = "'"
+    if "'" in content:
+        quote_mark = '"'
+        if '"' in content:
+            quote_mark = "'"
+            content = content.replace(r"'", r"\'")
+
+    return 'u'[not is_unicode:]+quote_mark+content+quote_mark
+
 string_literal_re = re.compile(r'''(?<![uU])(?P<q>['"]).+?(?<!\\)(?P=q)''')
 unicode_literal_re = re.compile(r'''[uU](?P<q>['"]).+?(?<!\\)(?P=q)''')
 
 def unescape_string_literal(b, target_encoding):
 
-    b = b.decode('string-escape')
+    b = b[1:-1].decode('string-escape')
 
     if chardet:
 
@@ -31,14 +42,13 @@ def unescape_string_literal(b, target_encoding):
             else:
                 b = b.encode(target_encoding)
 
-    b = b[0]+b[1:-1].replace(b[0], '\\'+b[0])+b[-1]
-
-    return b
+    return literalize(b)
 
 def unescape_unicode_literal(b, target_encoding):
-    b = b.decode('unicode-escape')
-    b = b[:2]+b[2:-1].replace(b[1], '\\'+b[1])+b[-1]
-    return b.encode(target_encoding)
+    return literalize(
+        b[2:-1].decode('unicode-escape').encode(target_encoding),
+        is_unicode=True
+    )
 
 def unescape(b, target_encoding=None):
 
