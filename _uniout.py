@@ -6,11 +6,6 @@ __all__ = ['unescape', 'make_unistream', 'runs_in_ipython']
 import sys
 import re
 
-try:
-    import chardet
-except ImportError:
-    chardet = None
-
 def literalize(content, is_unicode=False):
 
     quote_mark = "'"
@@ -29,18 +24,10 @@ def unescape_string_literal(b, target_encoding):
 
     b = b[1:-1].decode('string-escape')
 
-    if chardet:
-
-        r = chardet.detect(b)
-        confidence, b_encoding = r['confidence'], r['encoding']
-
-        if confidence >= 0.5 and b_encoding.lower() not in ('ascii', target_encoding.lower()):
-            try:
-                b = b.decode(b_encoding)
-            except (UnicodeDecodeError, LookupError):
-                pass
-            else:
-                b = b.encode(target_encoding)
+    try:
+        b.decode(target_encoding)
+    except UnicodeDecodeError:
+        b = b.encode('string-escape')
 
     return literalize(b)
 
