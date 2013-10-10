@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__all__ = ['unescape', 'Uniout', 'runs_in_ipython']
+__all__ = ['unescape', 'make_unistream', 'runs_in_ipython']
 
 import sys
 import re
@@ -22,21 +22,19 @@ def unescape(s):
 
     return s
 
-class Uniout(object):
-    '''It simulates a stream object, but unescapes the escaped bytes before
-    writing.'''
+def make_unistream(stream):
 
-    def __init__(self, stream):
+    unistream = lambda: 'middleware'
 
-        self.stream = stream
+    # make unistream look like the stream
+    for attr_name in dir(stream):
+        if not attr_name.startswith('_'):
+            setattr(unistream, attr_name, getattr(stream, attr_name))
 
-        # make uniout look like the stream
-        for attr_name in dir(stream):
-            if not attr_name.startswith('_'):
-                setattr(self, attr_name, getattr(stream, attr_name))
+    # modify the write method to de-escape
+    unistream.write = lambda bytes: stream.write(unescape(bytes))
 
-        # modify the write method to de-escape
-        self.write = lambda bytes: self.stream.write(unescape(bytes))
+    return unistream
 
 def runs_in_ipython():
     '''Check if we are in IPython.'''
