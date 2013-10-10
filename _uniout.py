@@ -11,8 +11,8 @@ try:
 except ImportError:
     chardet = None
 
-string_literal_re = re.compile('(?![uU])(?P<q>[\'"]).+(?P=q)')
-unicode_literal_re = re.compile('[uU](?P<q>[\'"]).+(?P=q)')
+string_literal_re = re.compile(r'''(?<![uU])(?P<q>['"]).+?(?<!\\)(?P=q)''')
+unicode_literal_re = re.compile(r'''[uU](?P<q>['"]).+?(?<!\\)(?P=q)''')
 
 def unescape_bytes(b, target_encoding):
 
