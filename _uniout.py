@@ -61,7 +61,7 @@ def make_unistream(stream):
             setattr(unistream, attr_name, getattr(stream, attr_name))
 
     # modify the write method to de-escape
-    unistream.write = lambda bytes: stream.write(unescape(bytes, unistream.encoding))
+    unistream.write = lambda b: stream.write(unescape(b, unistream.encoding))
 
     return unistream
 
