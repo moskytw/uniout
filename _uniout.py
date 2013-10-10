@@ -31,10 +31,14 @@ def unescape_string_literal(b, target_encoding):
             else:
                 b = b.encode(target_encoding)
 
+    b = b[0]+b[1:-1].replace(b[0], '\\'+b[0])+b[-1]
+
     return b
 
 def unescape_unicode_literal(b, target_encoding):
-    return b.decode('unicode-escape').encode(target_encoding)
+    b = b.decode('unicode-escape')
+    b = b[:2]+b[2:-1].replace(b[1], '\\'+b[1])+b[-1]
+    return b.encode(target_encoding)
 
 def unescape(b, target_encoding=None):
 
