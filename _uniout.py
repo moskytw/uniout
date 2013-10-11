@@ -3,16 +3,16 @@
 
 import re
 
-def literalize(content, is_unicode=False):
-    '''Literalize a string content.
+def literalize_string(content, is_unicode=False):
+    '''literalize_string a string content.
 
     Examples:
 
-    >>> print literalize('str')
+    >>> print literalize_string('str')
     'str'
-    >>> print literalize('\'str\'')
+    >>> print literalize_string('\'str\'')
     "'str'"
-    >>> print literalize('\"\'str\'\"')
+    >>> print literalize_string('\"\'str\'\"')
     '"\'str\'"'
     '''
 
@@ -45,7 +45,7 @@ def unescape_string_literal(literal, encoding):
 
     if literal[0] in 'uU':
 
-        return literalize(
+        return literalize_string(
             literal[2:-1].decode('unicode-escape').encode(encoding),
             is_unicode=True
         )
@@ -60,7 +60,7 @@ def unescape_string_literal(literal, encoding):
         except UnicodeDecodeError:
             return literal
 
-    return literalize(content)
+    return literalize_string(content)
 
 def unescape(b, encoding):
     '''Unescape all string and unicode literals in bytes.'''
