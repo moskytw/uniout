@@ -58,7 +58,7 @@ def unescape_string_literal(literal, encoding):
         try:
             content.decode(encoding)
         except UnicodeDecodeError:
-            content = content.encode('string-escape')
+            return literal
 
     return literalize(content)
 
