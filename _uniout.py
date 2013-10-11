@@ -4,7 +4,7 @@
 import re
 
 def literalize(content, is_unicode=False):
-    '''Literalize the content.
+    '''Literalize a string content.
 
     Examples:
 
@@ -27,8 +27,8 @@ def literalize(content, is_unicode=False):
 
 string_literal_re = re.compile(r'''[uU]?(?P<q>['"]).+?(?<!\\)(?P=q)''')
 
-def unescape_string_literal(b, target_encoding):
-    '''Unescape string or unicode literal.
+def unescape_string_literal(literal, encoding):
+    '''Unescape a string or unicode literal.
 
     Examples:
 
@@ -43,39 +43,40 @@ def unescape_string_literal(b, target_encoding):
     '\xa5@\xac\xc9\xa7a\xa6n'
     '''
 
-    if b[0] in 'uU':
+    if literal[0] in 'uU':
 
         return literalize(
-            b[2:-1].decode('unicode-escape').encode(target_encoding),
+            literal[2:-1].decode('unicode-escape').encode(encoding),
             is_unicode=True
         )
 
     else:
 
-        b = b[1:-1].decode('string-escape')
+        content = literal[1:-1].decode('string-escape')
 
+        # keep it escaped if the encoding doesn't work on it
         try:
-            b.decode(target_encoding)
+            content.decode(encoding)
         except UnicodeDecodeError:
-            b = b.encode('string-escape')
+            content = content.encode('string-escape')
 
-    return literalize(b)
+    return literalize(content)
 
-def unescape(b, target_encoding):
-    '''Unescape all string and unicode literals.'''
-    return string_literal_re.sub(lambda m: unescape_string_literal(m.group(), target_encoding), b)
+def unescape(b, encoding):
+    '''Unescape all string and unicode literals in bytes.'''
+    return string_literal_re.sub(lambda m: unescape_string_literal(m.group(), encoding), b)
 
 def make_unistream(stream):
-    '''Make a stream which unescapes literals before to write.'''
+    '''Make a stream which unescapes string literals before writes out.'''
 
-    unistream = lambda: 'middleware'
+    unistream = lambda: 'I am an unistream!'
 
     # make unistream look like the stream
     for attr_name in dir(stream):
         if not attr_name.startswith('_'):
             setattr(unistream, attr_name, getattr(stream, attr_name))
 
-    # modify the write method to de-escape
+    # modify the write method to unescape the output
     unistream.write = lambda b: stream.write(unescape(b, unistream.encoding))
 
     return unistream
