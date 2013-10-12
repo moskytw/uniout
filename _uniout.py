@@ -4,7 +4,7 @@
 import re
 
 def literalize_string(content, is_unicode=False):
-    '''literalize_string a string content.
+    '''Literalize a string content.
 
     Examples:
 
