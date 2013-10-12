@@ -4,7 +4,7 @@
 import re
 
 def literalize_string(content, is_unicode=False):
-    '''Literalize a string content.
+    r'''Literalize a string content.
 
     Examples:
 
@@ -28,11 +28,11 @@ def literalize_string(content, is_unicode=False):
 string_literal_re = re.compile(r'''[uU]?(?P<q>['"]).+?(?<!\\)(?P=q)''')
 
 def unescape_string_literal(literal, encoding):
-    '''Unescape a string or unicode literal.
+    r'''Unescape a string or unicode literal.
 
     Examples:
 
-    >>> u = u'世界你好'
+    >>> u = u'\u4e16\u754c\u4f60\u597d' # 世界你好
     >>> print unescape_string_literal(repr(u), 'utf-8')
     u'世界你好'
 
@@ -40,7 +40,7 @@ def unescape_string_literal(literal, encoding):
     '世界你好'
 
     >>> print unescape_string_literal(repr(u.encode('big5')), 'utf-8')
-    '\xa5@\xac\xc9\xa7a\xa6n'
+    '\xa5@\xac\xc9\xa7A\xa6n'
     '''
 
     if literal[0] in 'uU':
@@ -86,3 +86,7 @@ def runs_in_ipython():
     import __builtin__
     return '__IPYTHON__' in __builtin__.__dict__ and \
            __builtin__.__dict__['__IPYTHON__']
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod()
