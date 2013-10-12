@@ -7,24 +7,37 @@ escaped string.
 Example
 -------
 
-Here we have a Python script, test.py:
+>>> from pprint import pprint
+>>> langs = [
+...     'Hello, world!',
+...     '你好，世界！',
+...     'こんにちは世界',
+...     u'Hello, world!',
+...     u'你好，世界！',
+...     u'こんにちは世界'
+... ]
+... 
 
-::
+Before:
 
-    # test.py
+>>> pprint(langs)
+['Hello, world!',
+ '\xe4\xbd\xa0\xe5\xa5\xbd\xef\xbc\x8c\xe4\xb8\x96\xe7\x95\x8c\xef\xbc\x81',
+ '\xe3\x81\x93\xe3\x82\x93\xe3\x81\xab\xe3\x81\xa1\xe3\x81\xaf\xe4\xb8\x96\xe7\x95\x8c',
+ u'Hello, world!',
+ u'\u4f60\u597d\uff0c\u4e16\u754c\uff01',
+ u'\u3053\u3093\u306b\u3061\u306f\u4e16\u754c']
 
-    data = ['中文', 'にほんご', u'Λλ']
-    print 'Before:', data
+After:
 
-    import uniout
-    print 'After :', data
-
-The output of test.py:
-
-::
-
-    Before: ['\xe4\xb8\xad\xe6\x96\x87', '\xe3\x81\xab\xe3\x81\xbb\xe3\x82\x93\xe3\x81\x94', u'\u039b\u03bb']
-    After : ['中文', 'にほんご', u'Λλ']
+>>> import uniout
+>>> pprint(langs)
+['Hello, world!',
+ '你好，世界！',
+ 'こんにちは世界',
+ u'Hello, world!',
+ u'你好，世界！',
+ u'こんにちは世界']
 
 Installation
 ------------
