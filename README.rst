@@ -58,6 +58,7 @@ v0.3.2
 
 1. Show the original string if the escaped string can't be decoded properly.
 2. Use better way to find string literals.
+3. Print more correct unescaped string representation.
 
 v0.3.1
 ~~~~~~
