@@ -53,6 +53,11 @@ or download it manually.
 Change Log
 ----------
 
+v0.3.3
+~~~~~~
+
+1. Fixed the problem that Uniout can't be installed by PIP.
+
 v0.3.2
 ~~~~~~
 
