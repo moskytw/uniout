@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__version__ = '0.3.3'
-
 import re
 
 def literalize_string(content, is_unicode=False):
@@ -57,9 +55,10 @@ def unescape_string_literal(literal, encoding):
         content = literal[1:-1].decode('string-escape')
 
         # keep it escaped if the encoding doesn't work on it
+        # TypeError occurs if encoding is None
         try:
             content.decode(encoding)
-        except UnicodeDecodeError:
+        except (UnicodeDecodeError, TypeError):
             return literal
 
     return literalize_string(content)

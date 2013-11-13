@@ -3,12 +3,12 @@
 
 from setuptools import setup
 
-import _uniout
+import uniout
 
 setup(
 
     name = 'uniout',
-    version = _uniout.__version__,
+    version = uniout.__version__,
     description = 'Never see escaped bytes in output.',
     long_description = open('README.rst').read(),
 

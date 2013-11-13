@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 
 import sys
-from _uniout import __version__, make_unistream, runs_in_ipython
+from _uniout import make_unistream, runs_in_ipython
+
+__version__ = '0.3.3'
 
 if runs_in_ipython():
     from IPython.utils import io
