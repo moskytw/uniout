@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+__version__ = '0.3.3'
+
 import sys
-from _uniout import __version__, make_unistream, runs_in_ipython
+from _uniout import  make_unistream, runs_in_ipython
 
 if runs_in_ipython():
     from IPython.utils import io
