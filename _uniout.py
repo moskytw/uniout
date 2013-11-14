@@ -69,6 +69,9 @@ def unescape(b, encoding):
 def make_unistream(stream):
     '''Make a stream which unescapes string literals before writes out.'''
 
+    if not stream.isatty():
+        return stream
+
     unistream = lambda: 'I am an unistream!'
 
     # make unistream look like the stream
