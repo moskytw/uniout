@@ -53,6 +53,11 @@ or download it manually.
 Change Log
 ----------
 
+v0.3.5
+~~~~~~
+
+1. Make it still works for files.
+
 v0.3.4
 ~~~~~~
 
