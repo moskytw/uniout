@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import re
+from sys import getfilesystemencoding
 
 def literalize_string(content, is_unicode=False):
     r'''Literalize a string content.
@@ -43,6 +44,9 @@ def unescape_string_literal(literal, encoding):
     '\xa5@\xac\xc9\xa7A\xa6n'
     '''
 
+    if encoding is None:
+        encoding = getfilesystemencoding()
+
     if literal[0] in 'uU':
 
         return literalize_string(
@@ -68,9 +72,6 @@ def unescape(b, encoding):
 
 def make_unistream(stream):
     '''Make a stream which unescapes string literals before writes out.'''
-
-    if not stream.isatty():
-        return stream
 
     unistream = lambda: 'I am an unistream!'
 
