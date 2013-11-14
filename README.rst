@@ -53,6 +53,11 @@ or download it manually.
 Change Log
 ----------
 
+v0.3.4
+~~~~~~
+
+1. A better fix for the previous bug.
+
 v0.3.3
 ~~~~~~
 
