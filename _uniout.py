@@ -26,7 +26,7 @@ def literalize_string(content, is_unicode=False):
 
     return 'u'[not is_unicode:]+quote_mark+content+quote_mark
 
-string_literal_re = re.compile(r'''[uU]?(?P<q>['"]).+?(?<!\\)(?P=q)''')
+string_literal_re = re.compile(r'''[uU]?(?P<q>['"]).*?(?<!\\)(?P=q)''')
 
 def unescape_string_literal(literal, encoding):
     r'''Unescape a string or unicode literal.
