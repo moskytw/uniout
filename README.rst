@@ -53,6 +53,11 @@ or download it manually.
 Change Log
 ----------
 
+v0.3.6
+~~~~~~
+
+1. Fixed the issue with empty string.
+
 v0.3.5
 ~~~~~~
 
