@@ -1,3 +1,9 @@
+.. image:: https://pypip.in/v/uniout/badge.png
+   :target: https://pypi.python.org/pypi/uniout
+
+.. image:: https://pypip.in/d/uniout/badge.png
+   :target: https://pypi.python.org/pypi/uniout
+
 Uniout
 ======
 
