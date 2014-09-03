@@ -56,8 +56,8 @@ You can install it via PyPI,
 
 or download it manually.
 
-Change Log
-----------
+Changelog
+---------
 
 v0.3.7
 ~~~~~~
