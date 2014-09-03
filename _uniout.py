@@ -24,6 +24,9 @@ def literalize_string(content, is_unicode=False):
             quote_mark = "'"
             content = content.replace(r"'", r"\'")
 
+    if '\n' in content:
+        quote_mark *= 3
+
     return 'u'[not is_unicode:]+quote_mark+content+quote_mark
 
 string_literal_re = re.compile(r'''[uU]?(?P<q>['"]).*?(?<!\\)(?P=q)''')
