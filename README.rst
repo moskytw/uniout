@@ -59,6 +59,11 @@ or download it manually.
 Change Log
 ----------
 
+v0.3.7
+~~~~~~
+
+1. Switch to long-string syntax (``'''`` or ``"""``) automatically.
+
 v0.3.6
 ~~~~~~
 
