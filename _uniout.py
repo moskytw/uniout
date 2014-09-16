@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import re
-import __builtin__
 from sys import getfilesystemencoding
 
 def literalize_string(content, is_unicode=False):
@@ -91,8 +90,7 @@ def make_unistream(stream):
 
 def runs_in_ipython():
     '''Check if we are in IPython.'''
-    return '__IPYTHON__' in __builtin__.__dict__ and \
-           __builtin__.__dict__['__IPYTHON__']
+    return getattr(__builtins__, '__IPYTHON__', False)
 
 if __name__ == '__main__':
     import doctest
