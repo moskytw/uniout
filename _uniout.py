@@ -71,6 +71,8 @@ def unescape_string_literal(literal, encoding):
 
 def unescape(b, encoding):
     '''Unescape all string and unicode literals in bytes.'''
+    if isinstance(b, unicode):
+        b = b.encode(encoding)
     return string_literal_re.sub(lambda m: unescape_string_literal(m.group(), encoding), b)
 
 def make_unistream(stream):
