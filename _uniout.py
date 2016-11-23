@@ -73,6 +73,16 @@ def unescape(b, encoding):
     '''Unescape all string and unicode literals in bytes.'''
     return string_literal_re.sub(lambda m: unescape_string_literal(m.group(), encoding), b)
 
+def to_bytes(x, encoding):
+
+    if encoding is None:
+        encoding = getfilesystemencoding()
+
+    if isinstance(x, unicode):
+        return x.encode(encoding)
+
+    return x
+
 def make_unistream(stream):
     '''Make a stream which unescapes string literals before writes out.'''
 
@@ -84,7 +94,7 @@ def make_unistream(stream):
             setattr(unistream, attr_name, getattr(stream, attr_name))
 
     # modify the write method to unescape the output
-    unistream.write = lambda b: stream.write(unescape(b, unistream.encoding))
+    unistream.write = lambda b: stream.write(unescape(to_bytes(b, unistream.encoding), unistream.encoding))
 
     return unistream
 
