@@ -105,6 +105,7 @@ def make_unistream(stream):
 
     # modify the write method to unescape the output
     unistream.write = lambda b: stream.write(
+        # TODO: the to_bytes makes the behavior different, should we care?
         unescape(to_bytes(b, unistream.encoding), unistream.encoding)
     )
 
