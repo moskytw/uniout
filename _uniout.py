@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+
 import re
 from sys import getfilesystemencoding
+
 
 def literalize_string(content, is_unicode=False):
     r'''Literalize a string content.
@@ -29,7 +31,9 @@ def literalize_string(content, is_unicode=False):
 
     return 'u'[not is_unicode:]+quote_mark+content+quote_mark
 
+
 string_literal_re = re.compile(r'''[uU]?(?P<q>['"]).*?(?<!\\)(?P=q)''')
+
 
 def unescape_string_literal(literal, encoding):
     r'''Unescape a string or unicode literal.
@@ -69,9 +73,14 @@ def unescape_string_literal(literal, encoding):
 
     return literalize_string(content)
 
+
 def unescape(b, encoding):
     '''Unescape all string and unicode literals in bytes.'''
-    return string_literal_re.sub(lambda m: unescape_string_literal(m.group(), encoding), b)
+    return string_literal_re.sub(
+        lambda m: unescape_string_literal(m.group(), encoding),
+        b
+    )
+
 
 def to_bytes(x, encoding):
 
@@ -82,6 +91,7 @@ def to_bytes(x, encoding):
         return x.encode(encoding)
 
     return x
+
 
 def make_unistream(stream):
     '''Make a stream which unescapes string literals before writes out.'''
@@ -94,15 +104,19 @@ def make_unistream(stream):
             setattr(unistream, attr_name, getattr(stream, attr_name))
 
     # modify the write method to unescape the output
-    unistream.write = lambda b: stream.write(unescape(to_bytes(b, unistream.encoding), unistream.encoding))
+    unistream.write = lambda b: stream.write(
+        unescape(to_bytes(b, unistream.encoding), unistream.encoding)
+    )
 
     return unistream
+
 
 def runs_in_ipython():
     '''Check if we are in IPython.'''
     import __builtin__
     return '__IPYTHON__' in __builtin__.__dict__ and \
            __builtin__.__dict__['__IPYTHON__']
+
 
 if __name__ == '__main__':
     import doctest
