@@ -114,9 +114,7 @@ def make_unistream(stream):
 
 def runs_in_ipython():
     '''Check if we are in IPython.'''
-    import __builtin__
-    return '__IPYTHON__' in __builtin__.__dict__ and \
-           __builtin__.__dict__['__IPYTHON__']
+    return getattr(__builtins__, '__IPYTHON__', False)
 
 
 if __name__ == '__main__':
